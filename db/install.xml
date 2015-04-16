@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/forumng/db" VERSION="20140728" COMMENT="ForumNG is a reimplemented variant of the original Moodle forum system. It provides asynchronous discussion facilities."
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="" COMMENT="">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="intro" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="general" SEQUENCE="false" COMMENT="Forum type that will be used to display this forum. May be NULL for default type."/>
+        <FIELD NAME="ratingscale" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="0 to disable ratings. Positive integer to use numeric 0..N scale. Negative number to select a scale by (negative) scale ID."/>
+        <FIELD NAME="ratingfrom" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Time (in seconds since epoch). Users can only rate posts that are created on or after this time. 0 if no limit."/>
+        <FIELD NAME="ratinguntil" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Time (in seconds since epoch). Users can only rate posts that were created before this time. 0 if no limit."/>
+        <FIELD NAME="ratingthreshold" TYPE="int" LENGTH="9" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Required number of ratings. If a post receives fewer than this number of ratings, the average rating is not displayed or included in grades."/>
+        <FIELD NAME="grading" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="0 = no grade 1 = average rating 2 = count of ratings 3 = max of ratings 4 = min of ratings 5 = sum of ratings"/>
+        <FIELD NAME="attachmentmaxbytes" TYPE="int" LENGTH="9" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Maximum size of forum attachments in bytes."/>
+        <FIELD NAME="reportingemail" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Email address for reporting unacceptable post"/>
+        <FIELD NAME="subscription" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Controls whether users can subscribe to this forum via email. 0 = subscription not permitted 1 = subscription permitted 2 = initially subscribed, can unsubscribe 3 = force subscribe"/>
+        <FIELD NAME="feedtype" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Whether RSS/Atom feeds are permitted. 0 = no feed, 1 = discussions feed, 2 = all-posts feed."/>
+        <FIELD NAME="feeditems" TYPE="int" LENGTH="9" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of articles included in RSS feed. 0 = site default."/>
+        <FIELD NAME="maxpostsperiod" TYPE="int" LENGTH="9" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Time in seconds over which the maximum post counts are evaluated. (For example, if this is set to 1 day, and max posts is set to 10, then it will not let you post more than 10 posts in any 24-hour period.) 0 = no post restrictions."/>
+        <FIELD NAME="maxpostsblock" TYPE="int" LENGTH="9" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="After you make this many posts in the time period, you cannot post any more. 0 = not set."/>
+        <FIELD NAME="postingfrom" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="If nonzero, then users cannot make posts or replies to the forum until the specified date."/>
+        <FIELD NAME="postinguntil" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="If non-zero, users cannot make posts or replies to the forum after the specified date."/>
+        <FIELD NAME="typedata" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Stores arbitrary extra settings related to the forum type, if any; otherwise null. Data is stored as a serialized php object."/>
+        <FIELD NAME="magicnumber" TYPE="int" LENGTH="16" NOTNULL="true" SEQUENCE="false" COMMENT="A random number generated when the forum is created. This is used (along with user ID, group ID) to create hashes that allow remote access to the RSS/Atom feeds for the forum, providing limited access security for the feeds."/>
+        <FIELD NAME="completiondiscussions" TYPE="int" LENGTH="9" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Nonzero if a certain number of posts are required to mark this forum completed for a user."/>
+        <FIELD NAME="completionreplies" TYPE="int" LENGTH="9" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Nonzero if a certain number of replies are required to mark this forum complete for a user."/>
+        <FIELD NAME="completionposts" TYPE="int" LENGTH="9" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Nonzero if a certain number of posts or replies (total) are required to mark this forum complete for a user."/>
+        <FIELD NAME="removeafter" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Remove old discussions after certain period. 1 for one month, 2 for two months...12 for one year, 13 for two years and 14 for three years."/>
+        <FIELD NAME="removeto" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="This field stores the mod instance id of the target forum. Null means delete old discussions permanently."/>
+        <FIELD NAME="shared" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="If the forum is available for sharing on other courses, this flag will be set to 1."/>
+        <FIELD NAME="originalcmid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="If this forum is a reference to (clone of) a shared forum, this field is non-null and points to the original forum. (When this is set, other settings in this table are ignored.)"/>
+        <FIELD NAME="gradingscale" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="grading scale"/>
+        <FIELD NAME="canpostanon" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="This flag is set to 1 if the user can post anonymously as a moderator , 0 if not."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES> 
+</XMLDB>

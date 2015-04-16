@@ -1,0 +1,4 @@
+[Project]
+Name=moodle-mod_googledrive
+Manager=KDevGenericManager
+VersionControl=kdevgit
