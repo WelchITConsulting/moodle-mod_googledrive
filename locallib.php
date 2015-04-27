@@ -16,29 +16,3 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-function googledrive_add_instance($instance)
-{
-  global $DB;
-
-
-  return $instance->id;
-}
-
-function googledrive_update_instance($instance)
-{
-  global $DB;
-
-  return $DB->update_record("", $instance);
-}
-
-function googledrive_delete_instance($id)
-{
-  global $DB;
-
-  if (!$instance = $DB->get_record('googledrive', array('id' => $id))) {
-    return false;
-  }
-
-  return $DB->delete_records('googledrive', array('id' => $instance->id));
-}

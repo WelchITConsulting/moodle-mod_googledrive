@@ -19,9 +19,9 @@
  
 defined('MOODLE_INTERNAL') || die();
 
-$moodle->version   = 2015010100;
+$moodle->version   = 2015041600;
 $module->requires  = 2013110500;
-$module->component = 'mod_';
+$module->component = 'mod_googledrive';
 $module->cron      = 0;
 $module->maturity  = MATURITY_BETA;
-$module->release   = '0.1.0 (Build: 2015010100)';
+$module->release   = '0.1.0 (Build: 2015041600)';
