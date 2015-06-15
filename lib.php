@@ -19,26 +19,32 @@
 
 function googledrive_add_instance($instance)
 {
-  global $DB;
+    global $DB;
 
-
-  return $instance->id;
+    $instance->timemodified = time();
+    $instance->timecreated = $instance->timemodified;
+    if (!$instance->id = $DB->insert_record('googledrive', $instance)) {
+        return false;
+    }
+    return $instance->id;
 }
 
 function googledrive_update_instance($instance)
 {
-  global $DB;
+    global $DB;
 
-  return $DB->update_record("", $instance);
+    $instance->timemodified = time();
+
+    return $DB->update_record("googledrive", $instance);
 }
 
 function googledrive_delete_instance($id)
 {
-  global $DB;
+    global $DB;
 
-  if (!$instance = $DB->get_record('googledrive', array('id' => $id))) {
-    return false;
-  }
+    if (!$instance = $DB->get_record('googledrive', array('id' => $id))) {
+        return false;
+    }
 
-  return $DB->delete_records('googledrive', array('id' => $instance->id));
+    return $DB->delete_records('googledrive', array('id' => $instance->id));
 }
